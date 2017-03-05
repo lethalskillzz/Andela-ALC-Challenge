@@ -1,13 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_profile"
+    android:id="@+id/profile_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.lethalskillzz.andelaalcchallenge.view.activity.ProfileActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.activity.ProfileActivity">
 
-</RelativeLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/profile_collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <include
+                android:id="@+id/profile_detail_layout"
+                layout="@layout/profile_image_layout"
+                app:layout_collapseMode="parallax"
+                />
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/profile_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin"
+                />
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/preview_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_share"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_anchor="@id/profile_collapsing_toolbar"
+        />
+
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingRight="12dp">-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.5"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="15sp"-->
+                        <!--android:textSize="15sp"-->
+                        <!--android:textColor="@color/colorGrey"-->
+                        <!--android:text="Registration Type"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/preview_reg_type"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textSize="18sp"-->
+                        <!--android:textColor="@color/colorPrimary"-->
+                        <!--android:text="Ibbbdh"/>-->
+
+                <!--</LinearLayout>-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.5"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="15sp"-->
+                        <!--android:textSize="15sp"-->
+                        <!--android:textColor="@color/colorGrey"-->
+                        <!--android:text="T-TIN"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/preview_ttin"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textSize="18sp"-->
+                        <!--android:textColor="@color/colorPrimary"-->
+                        <!--android:text="Ibbbdh"/>-->
+
+                <!--</LinearLayout>-->
+
+            <!--</LinearLayout>-->
+
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dip"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:background="?android:attr/dividerVertical" />-->
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingRight="12dp">-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.5"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="15sp"-->
+                        <!--android:textSize="15sp"-->
+                        <!--android:textColor="@color/colorGrey"-->
+                        <!--android:text="Gender"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/preview_gender"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textSize="18sp"-->
+                        <!--android:textColor="@color/colorPrimary"-->
+                        <!--android:text="Ibbbdh"/>-->
+
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.5"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="15sp"-->
+                        <!--android:textSize="15sp"-->
+                        <!--android:textColor="@color/colorGrey"-->
+                        <!--android:text="Workspace Category"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/preview_work_space_category"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textSize="18sp"-->
+                        <!--android:textColor="@color/colorPrimary"-->
+                        <!--android:text="Ibbbdh"/>-->
+
+                <!--</LinearLayout>-->
+
+
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dip"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:background="?android:attr/dividerVertical" />-->
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingRight="12dp">-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.5"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="15sp"-->
+                        <!--android:textSize="15sp"-->
+                        <!--android:textColor="@color/colorGrey"-->
+                        <!--android:text="Phone Number"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/preview_phone"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textSize="18sp"-->
+                        <!--android:textColor="@color/colorPrimary"-->
+                        <!--android:text="Ibbbdh"/>-->
+
+                <!--</LinearLayout>-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.5"-->
+                    <!--android:orientation="vertical">-->
+
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="15sp"-->
+                        <!--android:textSize="15sp"-->
+                        <!--android:textColor="@color/colorGrey"-->
+                        <!--android:text="LGA"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/preview_lga"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textSize="18sp"-->
+                        <!--android:textColor="@color/colorPrimary"-->
+                        <!--android:text="Ibbbdh"/>-->
+
+
+                <!--</LinearLayout>-->
+
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dip"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:background="?android:attr/dividerVertical" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_marginTop="0dp"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingRight="12dp"-->
+                <!--android:paddingBottom="10dp">-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal">-->
+
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="0.5"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="15sp"-->
+                            <!--android:textSize="12sp"-->
+                            <!--android:textColor="@color/ash_background"-->
+                            <!--android:text="Latitude"/>-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/preview_latitude"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:textSize="15sp"-->
+                            <!--android:textColor="@android:color/white"-->
+                            <!--android:text="Ibbbdh"/>-->
+
+                    <!--</LinearLayout>-->
+
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="0.5"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="15sp"-->
+                            <!--android:textSize="12sp"-->
+                            <!--android:textColor="@color/ash_background"-->
+                            <!--android:text="Longitude"/>-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/preview_longitude"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:textSize="15sp"-->
+                            <!--android:textColor="@android:color/white"-->
+                            <!--android:text="Ibbbdh"/>-->
+
+
+                    <!--</LinearLayout>-->
+
+                <!--</LinearLayout>-->
+
+
+                <!--<TextView-->
+                    <!--android:id="@+id/preview_date_time"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--android:layout_marginTop="4.5dp"-->
+                    <!--android:text="Ibbbdh"/>-->
+
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+
+</android.support.design.widget.CoordinatorLayout>

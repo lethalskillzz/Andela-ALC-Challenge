@@ -1,11 +1,11 @@
-package com.lethalskillzz.andelaalcchallenge.manager;
+package com.lethalskillzz.andelaalcchallenge.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * Created by ibrahim.abdulkadir@bizzdesk.com on 22/10/2015.
+ * Created by ibrahim.abdulkadir@bizzdeskgroup.com on 22/10/2016.
  */
 public class ConnectionDetector {
 
