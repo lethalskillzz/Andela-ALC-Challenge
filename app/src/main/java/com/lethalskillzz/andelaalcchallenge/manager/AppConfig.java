@@ -8,11 +8,17 @@ public class AppConfig {
     // Server url
     public static String BASE_URL = "https://api.github.com/search/";
 
-
+    // GET java users from lagos
     public static final String GET_USERS = "users?q=language:java+location:lagos"; //GET
 
-    public static final String AUTHORIZATION = "696204274RL99mpfwfQxQKr3IH3";
+    // Github authorization token
+    public static final String AUTHORIZATION = "TruGitHub 1470209121281";
 
+    //
+    public static final int handlerClickUser = 0;
+
+    public static final int VIEW_ITEM_USER = 1;
+    public static final int VIEW_PROG = 0;
 
 
 }

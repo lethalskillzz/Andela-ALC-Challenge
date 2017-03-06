@@ -65,9 +65,9 @@ public class UserDataSource {
 
 
     /**
-     * Fetching All Users
+     * Read All Users
      */
-    public List<UserItem> fetchAllUser() {
+    public List<UserItem> readAllUser() {
 
         String whereClause = null;
         String[] whereArgs = null;
@@ -121,7 +121,7 @@ public class UserDataSource {
     /**
      * Clear All User
      */
-    public void clearUser() {
+    public void clearAllUser() {
         database.delete(DatabaseHelper.TABLE_USER, null, null);
     }
 
