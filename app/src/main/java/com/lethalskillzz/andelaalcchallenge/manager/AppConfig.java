@@ -5,7 +5,7 @@ package com.lethalskillzz.andelaalcchallenge.manager;
  */
 public class AppConfig {
 
-    // Server url
+    // Github API server
     public static String BASE_URL = "https://api.github.com/search/";
 
     // GET java users from lagos
@@ -16,6 +16,10 @@ public class AppConfig {
 
     //
     public static final int handlerClickUser = 0;
+    //
+    public static final int httpIntentLoadUsers = 1;
+    //
+    public static final int httpIntentLoadUsersError = 2;
 
     public static final int VIEW_ITEM_USER = 1;
     public static final int VIEW_PROG = 0;

@@ -12,7 +12,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,12 +19,15 @@ import com.lethalskillzz.andelaalcchallenge.R;
 import com.lethalskillzz.andelaalcchallenge.dao.UserDataSource;
 import com.lethalskillzz.andelaalcchallenge.model.UserItem;
 import com.lethalskillzz.andelaalcchallenge.network.ConnectionDetector;
+import com.lethalskillzz.andelaalcchallenge.service.HttpService;
 import com.lethalskillzz.andelaalcchallenge.view.adapter.UserItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.handlerClickUser;
+import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.httpIntentLoadUsers;
+import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.httpIntentLoadUsersError;
 
 public class UserListActivity extends AppCompatActivity {
 
@@ -51,8 +53,9 @@ public class UserListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.user_list_toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar()
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.user_list_toolbar);
+        //setSupportActionBar(toolbar);
 
         // creating connection detector class instance
         cd = new ConnectionDetector(this);
@@ -67,15 +70,34 @@ public class UserListActivity extends AppCompatActivity {
         rView.setLayoutManager(lLayout);
         rView.setHasFixedSize(true);
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (cd.isConnectingToInternet()) {
+
+                    Intent httpIntent = new Intent(UserListActivity.this, HttpService.class);
+                    httpIntent.putExtra("intent_type", httpIntentLoadUsers);
+                    startService(httpIntent);
+
+                } else {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    showSnackBar(getString(R.string.error_no_internet));
+                }
+            }
+        });
+
+
         setupUserItemAdapter();
 
 
         mUiHandler = new Handler() {
             public void handleMessage(Message msg) {
 
-                String data[] = ((String)msg.obj).trim().split(":");
+
                 switch(msg.what) {
                     case handlerClickUser: {
+
+                        String data[] = ((String)msg.obj).trim().split(":");
 
                         String id = data[0];
                         String login = data[1];
@@ -90,6 +112,18 @@ public class UserListActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     break;
+
+                    case httpIntentLoadUsers: {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        reloadUserOffline();
+                    }
+                    break;
+
+                    case httpIntentLoadUsersError: {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        showSnackBar(((String)msg.obj).trim());
+                    }
+                    break;
                 }
             }
 
@@ -99,15 +133,40 @@ public class UserListActivity extends AppCompatActivity {
 
 
     @Override
+    protected void onPause() {
+        super.onPause();
+
+        mUiHandler = null;
+    }
+
+
+    @Override
     public void onResume() {
         super.onResume();
 
-        loadUserOffline();
+        //loadUserOffline();
     }
 
     private void setupUserItemAdapter() {
         userItemAdapter = new UserItemAdapter(this, userItems);
         rView.setAdapter(userItemAdapter);
+
+        loadUserOffline();
+    }
+
+
+    private void reloadUserOffline() {
+
+        userDataSource.open();
+        List<UserItem> items = userDataSource.readAllUser();
+        userDataSource.close();
+
+        userItems.clear();
+        for (UserItem item: items) {
+            userItems.add(item);
+        }
+
+        userItemAdapter.notifyDataSetChanged();
 
     }
 
@@ -124,6 +183,27 @@ public class UserListActivity extends AppCompatActivity {
 
         userItemAdapter.notifyDataSetChanged();
 
+        loadUserOnline();
+
+    }
+
+    private  void loadUserOnline() {
+
+        if (cd.isConnectingToInternet()) {
+
+            mSwipeRefreshLayout.post(new Runnable() {
+                @Override public void run() {
+
+                    mSwipeRefreshLayout.setRefreshing(true);
+                    Intent httpIntent = new Intent(UserListActivity.this, HttpService.class);
+                    httpIntent.putExtra("intent_type", httpIntentLoadUsers);
+                    startService(httpIntent);
+                }
+            });
+
+        } else {
+            showSnackBar(getString(R.string.error_no_internet));
+        }
     }
 
 

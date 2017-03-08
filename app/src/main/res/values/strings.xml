@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Andela ALC Challenge</string>
+    <string name="splash_text">Supported by Google</string>
+
+    <string name="error_no_internet">Error! No internet connection.</string>
+    <string name="hint_search">Search</string>
+
 </resources>

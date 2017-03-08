@@ -1,14 +1,10 @@
 package com.lethalskillzz.andelaalcchallenge.network.rest;
 
-import com.lethalskillzz.andelaalcchallenge.model.UserItem;
-
-import java.util.List;
+import com.lethalskillzz.andelaalcchallenge.model.User;
 
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import rx.Observable;
 
-import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.AUTHORIZATION;
 import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.GET_USERS;
 
 /**
@@ -16,8 +12,7 @@ import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.GET_USERS;
  */
 public interface ApiInterface {
 
-
-    @Headers("Authorization :" + AUTHORIZATION)
+    //@Headers("Authorization :" + AUTHORIZATION)
     @GET(GET_USERS)
-    Observable<List<UserItem>> getUsers();
+    Observable<User> getUsers();
 }

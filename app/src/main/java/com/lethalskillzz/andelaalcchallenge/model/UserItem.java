@@ -1,5 +1,6 @@
 package com.lethalskillzz.andelaalcchallenge.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -10,12 +11,16 @@ import com.google.gson.annotations.SerializedName;
 public class UserItem {
 
     @SerializedName("id")
+    @Expose
     private String id;
     @SerializedName("login")
+    @Expose
     private String login;
     @SerializedName("avatar_url")
+    @Expose
     private String avatarUrl;
     @SerializedName("url")
+    @Expose
     private String url;
 
     public UserItem() {}
