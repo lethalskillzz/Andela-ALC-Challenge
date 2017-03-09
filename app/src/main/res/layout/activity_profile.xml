@@ -9,348 +9,268 @@
 
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/profile_appbar"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        >
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/profile_collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            >
 
 
             <include
-                android:id="@+id/profile_detail_layout"
                 layout="@layout/profile_image_layout"
                 app:layout_collapseMode="parallax"
                 />
 
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/profile_toolbar"
+            <FrameLayout
+                android:id="@+id/profile_layout_title"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin"
-                />
+                android:layout_height="130dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.3"
+                >
 
+                <LinearLayout
+                    android:id="@+id/profile_linearLayout_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/profile_text_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="bottom|center"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/profile_text_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@android:color/white"
+                        />
+
+                </LinearLayout>
+
+            </FrameLayout>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/preview_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_share"
-        app:backgroundTint="@color/colorPrimaryDark"
-        app:layout_anchorGravity="bottom|right|end"
-        app:layout_anchor="@id/profile_collapsing_toolbar"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:behavior_overlapTop="30dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardElevation="8dp"
+            app:contentPadding="16dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+
+                <LinearLayout
+                    android:background="@drawable/rounded_rectangle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="20dp"
+                    android:padding="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        >
+
+                        <TextView
+                            android:id="@+id/profile_text_repo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_repos"
+                            android:gravity="center_horizontal"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/white"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        >
+
+                        <TextView
+                            android:id="@+id/profile_text_following"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_following"
+                            android:gravity="center_horizontal"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/white"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:id="@+id/profile_text_followers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_followers"
+                            android:gravity="center_horizontal"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/white"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/profile_text_url"
+                    android:layout_margin="5dp"
+                    style="@style/LinkStyle"
+                    android:autoLink="web"
+                    />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/profile_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_anchor="@id/profile_layout_title"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:title=""
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <Space
+                android:layout_width="@dimen/image_final_width"
+                android:layout_height="@dimen/image_final_width"
+                />
+
+            <TextView
+                android:id="@+id/profile_text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_width"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher"
+        app:border_color="@android:color/white"
+        app:border_width="2dp"
+        app:finalHeight="@dimen/image_final_width"
+        app:finalYPosition="2dp"
+        app:layout_behavior="com.lethalskillzz.andelaalcchallenge.view.widget.AvatarImageBehavior"
+        app:startHeight="2dp"
+        app:startToolbarPosition="2dp"
+        app:startXPosition="2dp"
         />
 
 
-    <!--<android.support.v4.widget.NestedScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
-
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:paddingLeft="12dp"-->
-                <!--android:paddingRight="12dp">-->
-
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.5"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="15sp"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/colorGrey"-->
-                        <!--android:text="Registration Type"/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/preview_reg_type"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textSize="18sp"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:text="Ibbbdh"/>-->
-
-                <!--</LinearLayout>-->
-
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.5"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="15sp"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/colorGrey"-->
-                        <!--android:text="T-TIN"/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/preview_ttin"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textSize="18sp"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:text="Ibbbdh"/>-->
-
-                <!--</LinearLayout>-->
-
-            <!--</LinearLayout>-->
-
-
-            <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dip"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:background="?android:attr/dividerVertical" />-->
-
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:paddingLeft="12dp"-->
-                <!--android:paddingRight="12dp">-->
-
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.5"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="15sp"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/colorGrey"-->
-                        <!--android:text="Gender"/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/preview_gender"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textSize="18sp"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:text="Ibbbdh"/>-->
-
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.5"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="15sp"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/colorGrey"-->
-                        <!--android:text="Workspace Category"/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/preview_work_space_category"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textSize="18sp"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:text="Ibbbdh"/>-->
-
-                <!--</LinearLayout>-->
-
-
-            <!--</LinearLayout>-->
-
-            <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dip"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:background="?android:attr/dividerVertical" />-->
-
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:paddingLeft="12dp"-->
-                <!--android:paddingRight="12dp">-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.5"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="15sp"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/colorGrey"-->
-                        <!--android:text="Phone Number"/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/preview_phone"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textSize="18sp"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:text="Ibbbdh"/>-->
-
-                <!--</LinearLayout>-->
-
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.5"-->
-                    <!--android:orientation="vertical">-->
-
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="15sp"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textColor="@color/colorGrey"-->
-                        <!--android:text="LGA"/>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/preview_lga"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textSize="18sp"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:text="Ibbbdh"/>-->
-
-
-                <!--</LinearLayout>-->
-
-            <!--</LinearLayout>-->
-
-            <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dip"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:background="?android:attr/dividerVertical" />-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_marginTop="0dp"-->
-                <!--android:background="@color/colorPrimary"-->
-                <!--android:paddingLeft="12dp"-->
-                <!--android:paddingRight="12dp"-->
-                <!--android:paddingBottom="10dp">-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="horizontal">-->
-
-
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight="0.5"-->
-                        <!--android:orientation="vertical">-->
-
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="15sp"-->
-                            <!--android:textSize="12sp"-->
-                            <!--android:textColor="@color/ash_background"-->
-                            <!--android:text="Latitude"/>-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/preview_latitude"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:textSize="15sp"-->
-                            <!--android:textColor="@android:color/white"-->
-                            <!--android:text="Ibbbdh"/>-->
-
-                    <!--</LinearLayout>-->
-
-
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight="0.5"-->
-                        <!--android:orientation="vertical">-->
-
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="15sp"-->
-                            <!--android:textSize="12sp"-->
-                            <!--android:textColor="@color/ash_background"-->
-                            <!--android:text="Longitude"/>-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/preview_longitude"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:textSize="15sp"-->
-                            <!--android:textColor="@android:color/white"-->
-                            <!--android:text="Ibbbdh"/>-->
-
-
-                    <!--</LinearLayout>-->
-
-                <!--</LinearLayout>-->
-
-
-                <!--<TextView-->
-                    <!--android:id="@+id/preview_date_time"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:textSize="15sp"-->
-                    <!--android:textColor="@android:color/white"-->
-                    <!--android:layout_marginTop="4.5dp"-->
-                    <!--android:text="Ibbbdh"/>-->
-
-            <!--</LinearLayout>-->
-
-        <!--</LinearLayout>-->
-
-
-    <!--</android.support.v4.widget.NestedScrollView>-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/profile_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:src="@drawable/ic_share"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_behavior="com.lethalskillzz.andelaalcchallenge.view.widget.ScrollingFABBehaviour"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

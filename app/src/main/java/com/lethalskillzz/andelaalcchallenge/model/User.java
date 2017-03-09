@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by ibrahimabdulkadir on 07/03/2017.
+ * Created by lethalskillzz on 07/03/2017.
  */
 
 public class User {
@@ -19,6 +19,7 @@ public class User {
     public List<UserItem> getItems() {
         return items;
     }
+
 
     public void setItems(List<UserItem> items) {
         this.items = items;

@@ -10,9 +10,17 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lethalskillzz.andelaalcchallenge.R;
@@ -29,7 +37,7 @@ import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.handlerClic
 import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.httpIntentLoadUsers;
 import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.httpIntentLoadUsersError;
 
-public class UserListActivity extends AppCompatActivity {
+public class UserListActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private static final String TAG = UserListActivity.class.getSimpleName();
@@ -40,11 +48,15 @@ public class UserListActivity extends AppCompatActivity {
 
     public static Handler mUiHandler;
 
+    private Toolbar toolbar;
+    private CardView searchLayout;
+    private ImageView cancelSearch;
+    private EditText searchInput;
 
     private RecyclerView rView;
     private UserItemAdapter userItemAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
+    private TextView refreshText;
 
 
     @SuppressLint("HandlerLeak")
@@ -53,9 +65,8 @@ public class UserListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
-        //setSupportActionBar()
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.user_list_toolbar);
-        //setSupportActionBar(toolbar);
+        toolbar = (Toolbar) findViewById(R.id.user_list_toolbar);
+        setSupportActionBar(toolbar);
 
         // creating connection detector class instance
         cd = new ConnectionDetector(this);
@@ -63,13 +74,50 @@ public class UserListActivity extends AppCompatActivity {
         userDataSource = new UserDataSource(this);
         userItems = new ArrayList<>();
 
+        searchLayout = (CardView) findViewById(R.id.search_layout);
+        cancelSearch = (ImageView) findViewById(R.id.cancel_search);
+        cancelSearch.setOnClickListener(this);
+        searchInput = (EditText) findViewById(R.id.input_search);
+        searchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (s.toString().trim() != null) {
+                    List<UserItem> items;
+                    userDataSource.open();
+                    items = userDataSource.readUserByLogin(s.toString());
+                    userDataSource.close();
+
+                    userItems.clear();
+
+                    for (UserItem item : items) {
+                        userItems.add(item);
+                    }
+
+                    userItemAdapter.notifyDataSetChanged();
+                    mSwipeRefreshLayout.setRefreshing(false);
+                } else {
+                    reloadUserOffline();
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         LinearLayoutManager lLayout = new LinearLayoutManager(this);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.user_list_swipe_refresh_layout);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         rView = (RecyclerView) findViewById(R.id.user_list_recycler_view);
         rView.setLayoutManager(lLayout);
         rView.setHasFixedSize(true);
 
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.user_list_swipe_refresh_layout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -87,6 +135,9 @@ public class UserListActivity extends AppCompatActivity {
         });
 
 
+        refreshText = (TextView) findViewById(R.id.refresh_users_text);
+
+
         setupUserItemAdapter();
 
 
@@ -97,7 +148,7 @@ public class UserListActivity extends AppCompatActivity {
                 switch(msg.what) {
                     case handlerClickUser: {
 
-                        String data[] = ((String)msg.obj).trim().split(":");
+                        String data[] = ((String)msg.obj).trim().split("<>");
 
                         String id = data[0];
                         String login = data[1];
@@ -115,11 +166,13 @@ public class UserListActivity extends AppCompatActivity {
 
                     case httpIntentLoadUsers: {
                         mSwipeRefreshLayout.setRefreshing(false);
+                        updateUserList();
                         reloadUserOffline();
                     }
                     break;
 
                     case httpIntentLoadUsersError: {
+                        updateUserList();
                         mSwipeRefreshLayout.setRefreshing(false);
                         showSnackBar(((String)msg.obj).trim());
                     }
@@ -133,10 +186,22 @@ public class UserListActivity extends AppCompatActivity {
 
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.cancel_search:{
+                searchInput.setText("");
+                searchLayout.setVisibility( View.GONE);
+                toolbar.setVisibility(View.VISIBLE);
+            }
+            break;
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
 
-        mUiHandler = null;
+        //mUiHandler = null;
     }
 
 
@@ -147,10 +212,43 @@ public class UserListActivity extends AppCompatActivity {
         //loadUserOffline();
     }
 
+
+        @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_user, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch (id) {
+
+
+            case R.id.search:{
+                toolbar.setVisibility(View.GONE);
+                searchLayout.setVisibility(View.VISIBLE);
+            }
+            break;
+
+            default:
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
     private void setupUserItemAdapter() {
         userItemAdapter = new UserItemAdapter(this, userItems);
         rView.setAdapter(userItemAdapter);
 
+        updateUserList();
         loadUserOffline();
     }
 
@@ -191,6 +289,8 @@ public class UserListActivity extends AppCompatActivity {
 
         if (cd.isConnectingToInternet()) {
 
+            refreshText.setVisibility(View.GONE);
+
             mSwipeRefreshLayout.post(new Runnable() {
                 @Override public void run() {
 
@@ -207,6 +307,18 @@ public class UserListActivity extends AppCompatActivity {
     }
 
 
+    private void updateUserList() {
+
+        userDataSource.open();
+        if(userDataSource.isUserEmpty()) {
+            refreshText.setVisibility(View.VISIBLE);
+        } else {
+            refreshText.setVisibility(View.GONE);
+        }
+        userDataSource.close();
+
+    }
+
     //SnackBar function
     private void showSnackBar(String msg) {
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.user_list_coordinator_layout);
@@ -222,4 +334,5 @@ public class UserListActivity extends AppCompatActivity {
         textView.setTextColor(Color.WHITE);
         snackbar.show();
     }
+
 }

@@ -42,6 +42,24 @@ public class UserDataSource {
 
 
     /**
+     * Check if User are empty
+     */
+    public boolean isUserEmpty() {
+
+        boolean isEmpty = true;
+        Cursor cursor = database.query(DatabaseHelper.TABLE_USER,
+                allColumns, null, null, null, null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            isEmpty = false;
+        }
+        cursor.close();
+
+        return isEmpty;
+    }
+
+
+
+    /**
      * Creating Users
      */
     public boolean createUser(List<UserItem> userItems) {
@@ -96,6 +114,30 @@ public class UserDataSource {
         item.setUrl(cursor.getString(3));
 
         return item;
+    }
+
+
+    /**
+     * Read User by Login
+     */
+    public List<UserItem> readUserByLogin(String login) {
+
+        String whereClause = COLUMN_LOGIN + " LIKE ?";
+        String [] whereArgs = {"%"+login+"%"};
+        List<UserItem> userItems = new ArrayList<>();
+
+        Cursor cursor = database.query(TABLE_USER,
+                allColumns,whereClause, whereArgs, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            UserItem userItem = cursorToUser(cursor);
+            userItems.add(userItem);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return userItems;
     }
 
 

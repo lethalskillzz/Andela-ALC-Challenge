@@ -57,12 +57,12 @@ public class UserItemHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     private void clickUser(View v) {
         final int position = getPosition();
-        UserItem item  =  userItems.get(position);
+        UserItem item = userItems.get(position);
 
         Message msg = new Message();
         msg.what = handlerClickUser;
 
-        msg.obj = item.getId()+":"+item.getLogin()+":"+item.getAvatarUrl()+":"+item.getUrl();
+        msg.obj = item.getId()+"<>"+item.getLogin()+"<>"+item.getAvatarUrl()+"<>"+item.getUrl();
 
         if(UserListActivity.mUiHandler != null)
             UserListActivity.mUiHandler.sendMessage(msg);

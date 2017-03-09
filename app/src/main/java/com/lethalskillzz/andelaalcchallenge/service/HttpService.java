@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Message;
 import android.util.Log;
 
+import com.lethalskillzz.andelaalcchallenge.dao.ProfileDataSource;
 import com.lethalskillzz.andelaalcchallenge.dao.UserDataSource;
+import com.lethalskillzz.andelaalcchallenge.model.ProfileItem;
 import com.lethalskillzz.andelaalcchallenge.model.User;
 import com.lethalskillzz.andelaalcchallenge.model.UserItem;
 import com.lethalskillzz.andelaalcchallenge.network.rest.ApiClient;
 import com.lethalskillzz.andelaalcchallenge.network.rest.ApiInterface;
+import com.lethalskillzz.andelaalcchallenge.view.activity.ProfileActivity;
 import com.lethalskillzz.andelaalcchallenge.view.activity.UserListActivity;
 
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.httpIntentLoadProfile;
 import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.httpIntentLoadUsers;
 import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.httpIntentLoadUsersError;
 
@@ -35,6 +39,11 @@ public class HttpService extends IntentService {
     private UserDataSource userDataSource;
     private List<UserItem> userItems;
 
+    private ProfileDataSource profileDataSource;
+    private ProfileItem profileItem;
+
+    private String profileUrl;
+
     public HttpService() {
         super(TAG);
     }
@@ -46,12 +55,21 @@ public class HttpService extends IntentService {
         userDataSource = new UserDataSource(getApplicationContext());
         userItems = new ArrayList<>();
 
+        profileDataSource = new ProfileDataSource(this);
+        profileItem = new ProfileItem();
+
         if (intent != null) {
             int intentType = intent.getIntExtra("intent_type", 0);
             switch (intentType) {
 
                 case httpIntentLoadUsers: {
                     loadGithubUsers();
+                }
+                break;
+
+                case httpIntentLoadProfile: {
+                    profileUrl = intent.getStringExtra("profile_url");
+                    loadGithubProfile();
                 }
                 break;
 
@@ -64,20 +82,6 @@ public class HttpService extends IntentService {
 
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
-
-//        Call<UserItem> call = apiService.getUsers();
-//        call.enqueue(new Callback<UserItem>() {
-//            @Override
-//            public void onResponse(Call<UserItem>call, Response<UserItem> response) {
-//                //response.body().;
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserItem>call, Throwable t) {
-//                // Log error here since request failed
-//                Log.e(TAG, t.toString());
-//            }
-//        });
 
         Observable<User> call = apiService.getUsers();
         Subscription subscription = call
@@ -116,6 +120,49 @@ public class HttpService extends IntentService {
     }
 
 
+
+    private void loadGithubProfile() {
+
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+
+        Observable<ProfileItem> call = apiService.getProfile(profileUrl);
+        Subscription subscription = call
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ProfileItem>() {
+                    @Override
+                    public void onCompleted() {
+
+                        profileDataSource.open();
+                        profileDataSource.createProfile(profileItem);
+                        profileDataSource.close();
+
+                        sendMessage(httpIntentLoadProfile, null);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        // cast to retrofit.HttpException to get the response code
+                        if (e instanceof HttpException) {
+                            HttpException response = (HttpException) e;
+                            Log.e(TAG, "Response Code: " + response.code());
+                            Log.e(TAG, "Response Message: " + response.message());
+
+                            sendMessage(httpIntentLoadUsersError, response.message());
+                        }
+                    }
+
+                    @Override
+                    public void onNext(ProfileItem item) {
+                        profileItem = item;
+                    }
+
+                });
+    }
+
+
+
     private void sendMessage(int id, String data) {
 
 
@@ -129,6 +176,17 @@ public class HttpService extends IntentService {
 
                 if (UserListActivity.mUiHandler != null)
                     UserListActivity.mUiHandler.sendMessage(msg);
+            }
+            break;
+
+            case httpIntentLoadProfile: {
+
+                Message msg = new Message();
+                msg.what = httpIntentLoadProfile;
+                msg.obj = data;
+
+                if (ProfileActivity.mUiHandler != null)
+                    ProfileActivity.mUiHandler.sendMessage(msg);
             }
             break;
 

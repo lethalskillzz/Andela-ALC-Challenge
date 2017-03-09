@@ -13,15 +13,19 @@ public class UserItem {
     @SerializedName("id")
     @Expose
     private String id;
+
     @SerializedName("login")
     @Expose
     private String login;
+
     @SerializedName("avatar_url")
     @Expose
     private String avatarUrl;
+
     @SerializedName("url")
     @Expose
     private String url;
+
 
     public UserItem() {}
 

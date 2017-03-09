@@ -13,12 +13,12 @@
         android:padding="8dp">
 
 
-
         <ImageView
             android:id="@+id/item_user_avatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
             />
+
 
         <TextView
             android:id="@+id/item_user_login"
@@ -34,6 +34,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="75dp"
         android:background="?android:attr/dividerVertical"
         />
 

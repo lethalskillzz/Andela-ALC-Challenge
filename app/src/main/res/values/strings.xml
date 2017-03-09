@@ -4,5 +4,9 @@
 
     <string name="error_no_internet">Error! No internet connection.</string>
     <string name="hint_search">Search</string>
+    <string name="msg_refresh_user">Pull down to refresh</string>
+    <string name="text_followers">followers</string>
+    <string name="text_following">following</string>
+    <string name="text_repos">repos</string>
 
 </resources>
