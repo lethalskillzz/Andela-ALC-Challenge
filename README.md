@@ -4,27 +4,28 @@ Andela Android Learning Community Intermediate Track Challenge
 
 ## Objectives
 
- Build an Android app to retrieve a list of Java Developers in Lagos using the  Github API
- ● Display the list of developers on a list. Each item on the list should have:
- ○ User’s profile image
- ○ User’s GitHub username
- ● Clicking each item on the list should show their profile details.
- ● The profile screen should contain:
- ○ Username
- ○ Profile photo
- ○ Github profile URL
- ○ Button to share their profile, and it should launch a share intent and the
- content of the share should be  “Check out this awesome developer @<github
- username>, <github profile url>.”
- ○ Clicking on the Github url should launch the browser and link to their Github page.
+ Build an Android app to retrieve a list of Java Developers in Lagos using the  Github API<br>
+ ● Display the list of developers on a list. Each item on the list should have:<br>
+ ○ User’s profile image<br>
+ ○ User’s GitHub username<br>
+ ● Clicking each item on the list should show their profile details.<br>
+ ● The profile screen should contain:<br>
+ ○ Username<br>
+ ○ Profile photo<br>
+ ○ Github profile URL<br>
+ ○ Button to share their profile, and it should launch a share intent and the<br>
+ content of the share should be  “Check out this awesome developer @<github<br>
+ username>, <github profile url>.”<br>
+ ○ Clicking on the Github url should launch the browser and link to their Github page.<br>
 
 
 # Screenshots
 
 <p align="center">
-<img src="https://github.com/OlayinkaPeter/Andela-ALC-Challenge/blob/master/screenshots/Screenshot_main.png" width="30%">
-<img src="https://github.com/OlayinkaPeter/Andela-ALC-Challenge/blob/master/screenshots/Screenshot_.png" width="30%">
-<img src="https://github.com/OlayinkaPeter/Andela-ALC-Challenge/blob/master/screenshots/Screenshot.png" width="30%">
+<img src="device-2017-03-10-103610.png" width="30%">
+<img src="device-2017-03-10-103647.png" width="30%">
+<img src="device-2017-03-10-103722.png" width="30%">
+<img src="device-2017-03-10-103745.png" width="30%">
 </p>
 
 ### Dependencies
