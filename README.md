@@ -29,6 +29,11 @@ Andela Android Learning Community Intermediate Track Challenge
 <img src="device-2017-03-10-103745.png" width="30%">
 </p>
 
+
+# Check Out
+
+![](screen.gif?raw=true)
+
 ### Dependencies
 
 Make sure to require Internet permissions in your `AndroidManifest.xml` file:
