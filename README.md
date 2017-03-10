@@ -23,6 +23,7 @@ Andela Android Learning Community Intermediate Track Challenge
 
 <p align="center">
 <img src="device-2017-03-10-103610.png" width="30%">
+<img src="device-2017-03-10-112543.png" width="30%">
 <img src="device-2017-03-10-103647.png" width="30%">
 <img src="device-2017-03-10-103722.png" width="30%">
 <img src="device-2017-03-10-103745.png" width="30%">
