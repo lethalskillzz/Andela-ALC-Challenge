@@ -137,6 +137,11 @@
 
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="0.8dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -162,6 +167,11 @@
                             />
 
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="0.8dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white" />
 
                     <LinearLayout
                         android:layout_gravity="center"

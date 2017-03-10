@@ -104,7 +104,7 @@ public class ProfileDataSource {
     public void deleteProfileItem(ProfileItem profileItem) {
         String id = profileItem.getLogin();
         database.delete(DatabaseHelper.TABLE_PROFILE, COLUMN_LOGIN
-                + " = " + id, null);
+                + " = " + "\"" + id + "\"", null);
     }
 
     /**

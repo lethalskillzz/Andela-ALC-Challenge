@@ -9,6 +9,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:orientation="horizontal"
         android:padding="8dp">
 
@@ -34,8 +35,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:layout_marginStart="75dp"
-        android:layout_marginLeft="75dp"
         android:background="?android:attr/dividerVertical"
         />
 

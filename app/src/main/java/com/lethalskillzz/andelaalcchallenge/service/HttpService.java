@@ -135,6 +135,7 @@ public class HttpService extends IntentService {
                     public void onCompleted() {
 
                         profileDataSource.open();
+                        profileDataSource.deleteProfileItem(profileItem);
                         profileDataSource.createProfile(profileItem);
                         profileDataSource.close();
 

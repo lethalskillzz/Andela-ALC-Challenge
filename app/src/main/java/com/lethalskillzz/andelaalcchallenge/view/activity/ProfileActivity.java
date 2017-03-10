@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -31,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.GET_PROFILE;
 import static com.lethalskillzz.andelaalcchallenge.manager.AppConfig.httpIntentLoadProfile;
 
-public class ProfileActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener{
+public class ProfileActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener {
 
     private static final String TAG = ProfileActivity.class.getSimpleName();
     private ConnectionDetector cd;
@@ -53,8 +54,6 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
     private boolean mIsTheTitleVisible          = false;
     private boolean mIsTheTitleContainerVisible = true;
 
-
-
     private LinearLayout mTitleContainer;
     private AppBarLayout mAppBarLayout;
     private Toolbar mToolbar;
@@ -66,6 +65,7 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
     private TextView textFollowing;
     private TextView textFollowers;
     private TextView textUrl;
+    private FloatingActionButton shareFab;
 
 
 
@@ -91,12 +91,15 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
 
         bindActivity();
 
+        shareFab.setOnClickListener(this);
+
         textTitle.setText(login);
         textLogin.setText(login);
         textUrl.setText(url);
 
 
-        Glide.with(getApplicationContext()).load(avatarUrl).asBitmap().centerCrop().into(new BitmapImageViewTarget(profileImage) {
+        Glide.with(getApplicationContext()).load(avatarUrl)
+                .asBitmap().centerCrop().into(new BitmapImageViewTarget(profileImage) {
             @Override
             protected void setResource(Bitmap resource) {
                 RoundedBitmapDrawable circularBitmapDrawable =
@@ -108,7 +111,6 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
 
         mUiHandler = new Handler() {
             public void handleMessage(Message msg) {
-
 
                 switch(msg.what) {
                     case httpIntentLoadProfile: {
@@ -170,6 +172,7 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
         textFollowing   = (TextView) findViewById(R.id.profile_text_following);
         textFollowers   = (TextView) findViewById(R.id.profile_text_followers);
         textUrl         = (TextView) findViewById(R.id.profile_text_url);
+        shareFab        = (FloatingActionButton) findViewById(R.id.profile_fab);
     }
 
 
@@ -226,7 +229,6 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
     }
 
 
-
     //SnackBar function
     private void showSnackBar(String msg) {
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.profile_coordinator_layout);
@@ -241,5 +243,22 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
         snackbar.show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.profile_fab: {
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                String formattedString = "Check out this awesome developer "+"@"+login+", "+url+".";
+                sendIntent.putExtra(Intent.EXTRA_TEXT, formattedString);
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "Share With"));
+
+            }
+            break;
+        }
     }
 }

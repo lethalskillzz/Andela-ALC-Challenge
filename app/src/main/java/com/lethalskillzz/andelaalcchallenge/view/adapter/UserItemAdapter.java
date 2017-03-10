@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.lethalskillzz.andelaalcchallenge.R;
@@ -66,7 +68,17 @@ public class UserItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             final UserItem item = userItems.get(position);
             ((UserItemHolder) holder).login.setText(item.getLogin());
 
-            Glide.with(context).load(item.getAvatarUrl()).asBitmap().centerCrop().into(new BitmapImageViewTarget(((UserItemHolder) holder).avatar) {
+
+            ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
+            // generate random color
+            int color = generator.getRandomColor();
+
+            TextDrawable drawable = TextDrawable.builder()
+                    .buildRound(item.getLogin().substring(0,1), color);
+
+
+            Glide.with(context).load(item.getAvatarUrl())
+                    .asBitmap().centerCrop().placeholder(drawable).into(new BitmapImageViewTarget(((UserItemHolder) holder).avatar) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =
@@ -75,6 +87,7 @@ public class UserItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     ((UserItemHolder) holder).avatar.setImageDrawable(circularBitmapDrawable);
                 }
             });
+
 
         }
     }
