@@ -31,11 +31,6 @@ Andela Android Learning Community Intermediate Track Challenge
 </p>
 
 
-# Check Out
-
-<p align="center">
-![](screen.gif?raw=true)
-</p>
 
 ### Dependencies
 
