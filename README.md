@@ -27,13 +27,14 @@ Andela Android Learning Community Intermediate Track Challenge
 <img src="device-2017-03-10-103647.png" width="30%">
 <img src="device-2017-03-10-103722.png" width="30%">
 <img src="device-2017-03-10-103745.png" width="30%">
+<img src="screen.gif" width="30%">
 </p>
 
 
 # Check Out
 
 <p align="center">
-![](screen.gif?raw=true width="30%")
+![](screen.gif?raw=true)
 </p>
 
 ### Dependencies
