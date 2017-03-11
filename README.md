@@ -32,7 +32,9 @@ Andela Android Learning Community Intermediate Track Challenge
 
 # Check Out
 
-![](screen.gif?raw=true)
+<p align="center">
+![](screen.gif?raw=true width="30%")
+</p>
 
 ### Dependencies
 
