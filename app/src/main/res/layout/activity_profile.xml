@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.activity.ProfileActivity">
+    tools:context=".view.activity.ProfileActivity"
+    >
 
 
     <android.support.design.widget.AppBarLayout
@@ -140,7 +141,8 @@
                     <View
                         android:layout_width="0.8dp"
                         android:layout_height="match_parent"
-                        android:background="@android:color/white" />
+                        android:background="@android:color/white"
+                        />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -171,7 +173,8 @@
                     <View
                         android:layout_width="0.8dp"
                         android:layout_height="match_parent"
-                        android:background="@android:color/white" />
+                        android:background="@android:color/white"
+                        />
 
                     <LinearLayout
                         android:layout_gravity="center"
@@ -280,7 +283,8 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:src="@drawable/ic_share"
         app:backgroundTint="@color/colorPrimaryDark"
-        app:layout_behavior="com.lethalskillzz.andelaalcchallenge.view.widget.ScrollingFABBehaviour"/>
+        app:layout_behavior="com.lethalskillzz.andelaalcchallenge.view.widget.ScrollingFABBehaviour"
+        />
 
 
 </android.support.design.widget.CoordinatorLayout>

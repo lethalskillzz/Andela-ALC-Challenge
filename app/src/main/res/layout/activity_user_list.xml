@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.activity.UserListActivity">
+    tools:context=".view.activity.UserListActivity"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/user_list_toolbar"
@@ -29,12 +31,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             card_view:cardCornerRadius="4dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
             <EditText
                 android:id="@+id/input_search"
@@ -73,12 +77,14 @@
         android:id="@+id/user_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/user_list_swipe_refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/user_list_recycler_view"
@@ -95,7 +101,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/msg_refresh_user"/>
+            android:text="@string/msg_refresh_user"
+            />
 
     </RelativeLayout>
 

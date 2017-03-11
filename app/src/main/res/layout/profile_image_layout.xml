@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    >
 
     <ImageView
         android:id="@+id/profile_image_overlay"
@@ -15,7 +16,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@color/primary_overlay" />
+        android:background="@color/primary_overlay"
+        />
 
 
 </RelativeLayout>
