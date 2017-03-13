@@ -93,7 +93,9 @@ public class HttpService extends IntentService {
 
                         userDataSource.open();
                         userDataSource.clearAllUser();
-                        userDataSource.createUser(userItems);
+                        for (UserItem item : userItems) {
+                            userDataSource.createUser(item);
+                        }
                         userDataSource.close();
 
                         sendMessage(httpIntentLoadUsers, null);

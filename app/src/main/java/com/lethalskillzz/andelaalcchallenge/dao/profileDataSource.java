@@ -46,7 +46,7 @@ public class ProfileDataSource {
     /**
      * Creating Profiles
      */
-    public boolean createProfile(ProfileItem profileItem) {
+    public ProfileItem createProfile(ProfileItem profileItem) {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_LOGIN, profileItem.getLogin());
@@ -58,7 +58,7 @@ public class ProfileDataSource {
         // insert row
         database.insert(DatabaseHelper.TABLE_PROFILE, DatabaseHelper.COLUMN_ID, values);
 
-        return true;
+        return profileItem;
     }
 
 
@@ -101,9 +101,9 @@ public class ProfileDataSource {
     /**
      * Delete Single Profile
      */
-    public void deleteProfileItem(ProfileItem profileItem) {
+    public long deleteProfileItem(ProfileItem profileItem) {
         String id = profileItem.getLogin();
-        database.delete(DatabaseHelper.TABLE_PROFILE, COLUMN_LOGIN
+        return database.delete(DatabaseHelper.TABLE_PROFILE, COLUMN_LOGIN
                 + " = " + "\"" + id + "\"", null);
     }
 

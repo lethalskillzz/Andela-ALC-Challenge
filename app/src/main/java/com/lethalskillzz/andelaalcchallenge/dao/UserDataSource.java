@@ -62,10 +62,7 @@ public class UserDataSource {
     /**
      * Creating Users
      */
-    public boolean createUser(List<UserItem> userItems) {
-
-
-        for (UserItem userItem : userItems) {
+    public UserItem createUser(UserItem userItem) {
 
             ContentValues values = new ContentValues();
             values.put(DatabaseHelper.COLUMN_ID, userItem.getId());
@@ -76,9 +73,8 @@ public class UserDataSource {
             // insert row
             database.insert(DatabaseHelper.TABLE_USER, DatabaseHelper.COLUMN_ID, values);
 
-        }
 
-        return true;
+        return userItem;
     }
 
 
@@ -154,9 +150,9 @@ public class UserDataSource {
     /**
      * Delete Single User
      */
-    public void deleteUserItem(UserItem userItem) {
+    public long deleteUserItem(UserItem userItem) {
         String id = userItem.getId();
-        database.delete(DatabaseHelper.TABLE_USER, COLUMN_ID
+        return database.delete(DatabaseHelper.TABLE_USER, COLUMN_ID
                 + " = " + id, null);
     }
 
