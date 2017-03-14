@@ -1,3 +1,5 @@
+### Status
+[![Build Status](https://travis-ci.org/lethalskillzz/Andela-ALC-Challenge.svg?branch=master)](https://travis-ci.org/lethalskillzz/Andela-ALC-Challenge)
 [![Coverage Status](https://coveralls.io/repos/github/lethalskillzz/Andela-ALC-Challenge/badge.svg?branch=master)](https://coveralls.io/github/lethalskillzz/Andela-ALC-Challenge?branch=master)
 
 
