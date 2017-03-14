@@ -1,17 +1,25 @@
 language: android
 jdk: oraclejdk8
-
 android:
-  components:
-    # Update Android SDK Tools
+ components:
+   # Uncomment the lines below if you want to
+   # use the latest revision of Android SDK Tools
+    - platform-tools
     - tools
 
+   # The BuildTools version used by your project
     - build-tools-25.0.0
+
+    # The SDK version used to compile your project
     - android-25
 
     # Support library
     - extra-android-support
     - extra-android-m2repository
 
-    script:
-    - chmod +x ./gradlew
+
+before_install:
+- chmod +x gradlew
+
+
+
