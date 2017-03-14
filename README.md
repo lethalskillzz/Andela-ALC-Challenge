@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/lethalskillzz/Andela-ALC-Challenge/badge.svg?branch=master)](https://coveralls.io/github/lethalskillzz/Andela-ALC-Challenge?branch=master)
+
 # Andela-ALC-Challenge
 Andela Android Learning Community Intermediate Track Challenge
 
