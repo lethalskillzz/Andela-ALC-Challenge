@@ -71,6 +71,10 @@ Make sure to require Internet permissions in your `AndroidManifest.xml` file:
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 ```
 
+### Test Coverage
+
+Integration tests.
+
 ## License
 
 Copyright 2017 Ibrahim Abdulkadir
