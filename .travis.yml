@@ -25,6 +25,8 @@ before_script:
 
 script: ""
 
+after_success:
+- ./gradlew cobertura coveralls
 
 deploy:
   provider: releases
@@ -33,3 +35,4 @@ deploy:
   on:
     tags: true
     all_branches: true
+
