@@ -23,12 +23,9 @@ before_install:
 before_script:
   - chmod +x gradlew
 
-#script: ""
-#
-#after_success:
-#- ./gradlew cobertura coveralls
+script: ""
 
-script:
+after_success:
     - ./gradlew testBlueDebugUnitTestCoverage coveralls
 
 deploy:
