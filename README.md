@@ -24,7 +24,6 @@ Andela Android Learning Community Intermediate Track Challenge
  username>, <github profile url>.”<br>
  ○ Clicking on the Github url should launch the browser and link to their Github page.<br>
 
-
 # Screenshots
 
 <p align="center">
@@ -35,8 +34,6 @@ Andela Android Learning Community Intermediate Track Challenge
 <img src="device-2017-03-10-103745.png" width="30%">
 <img src="screen.gif" width="30%">
 </p>  
-
-
 
 ### Dependencies
 
